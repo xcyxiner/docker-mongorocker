@@ -1,25 +1,35 @@
 docker-mongorocker fork
 =======================
 
-Just the original docker with some features for customization.
+# 操作处理
+* 1 修改docker-compose.yml中的环境变量(主要是host以及端口)
+* 2 执行docker-compose up -d 之后参考1.sh中的脚步进行配置
+* 3 拷贝config.php 修改其中的配置
 
-Instructions:
- - Link to a MongoDB container and name the link "mongo" in this side.
- - Expose mongorock port 80 (ie, in port 8080)
-
-```bash
-    docker run ... -l mymongocontainername:mongo -p 8080:80
+```
+$MONGO["servers"][$i]["mongo_db"] = "admin";//default mongo db to connect, works only if mongo_auth=false
+$MONGO["servers"][$i]["mongo_user"] = "用户名";//mongo authentication user name, works only if mongo_auth=false
+$MONGO["servers"][$i]["mongo_pass"] = "密码";//mongo authentication password, works only if mongo_auth=false
+$MONGO["servers"][$i]["mongo_auth"] = true;//enable mongo authentication?
 ```
 
-Notes:
- - rockmongo user/pass: admin (no password) !!!!!!!!!!!!! BE CAREFUL !!!!!!!!!!!!!!
- - MongoDB user/pass: no pass (so nothing configured in config.php)
+* 4 创建htpasswd文件，输入http basic 的用户名名和密码
 
+```
+chmod 777 htpasswd.py
+./htpasswd.py -c -b htpasswd username password
+```
 
+* 5 将上面的配置重新拷贝进虚拟机
 
-You can also define a hostname "rockmongo.docker.local" to your docker IP (localhost, boot2docker IP, panamax IP...) to access rockmongo's nginx.
+```
+docker cp config.php dockermongorocker_rockmongo_1:/app/config.php
+docker cp htpasswd dockermongorocker_rockmongo_1:/etc/nginx/htpasswd
+docker cp rockmongo.conf dockermongorocker_rockmongo_1:/etc/nginx/sites-available/default
+```
 
- - You can also use "docker run" env params to change:
-  - Name of linked MongoDB
-  - MongoDB hostname, MongoDB port (by default: linked MongoDB hostname autoset by docker & 27017)
-  - Different hostname for nginx site
+* 6 重启虚拟机
+
+```
+docker-compose restart
+```
