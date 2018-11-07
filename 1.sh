@@ -1,4 +1,4 @@
-docker cp dockermongorocker_rockmongo_1:/app/config.php config.php
+docker cp rockmongo:/app/config.php config.php
 # 修改里面的MongoDB配置
 
 
@@ -11,6 +11,6 @@ chmod 777 htpasswd.py
 #auth_basic_user_file  /usr/local/nginx/conf/htpasswd;
 
 
-docker cp config.php dockermongorocker_rockmongo_1:/app/config.php
-docker cp htpasswd dockermongorocker_rockmongo_1:/etc/nginx/htpasswd
-docker cp rockmongo.conf dockermongorocker_rockmongo_1:/etc/nginx/sites-available/default
+docker cp config.php rockmongo:/app/config.php
+docker cp htpasswd rockmongo:/etc/nginx/htpasswd
+docker cp rockmongo.conf rockmongo:/etc/nginx/sites-available/default

@@ -1,9 +1,7 @@
 rockmongo:
       image: javierjeronimo/rockmongo
-      #build: .
+      container_name: "rockmongo"
       hostname: rockmongo
-#      volumes:
-#          - /opt/rockmongo/docker-mongorocker/source:/app
       environment:
          - MONGO_NAME=mongo
          - MONGO_HOSTNAME=xxx.xxx.xxx.xxx
