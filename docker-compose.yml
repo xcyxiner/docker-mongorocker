@@ -2,9 +2,5 @@ rockmongo:
       image: javierjeronimo/rockmongo
       container_name: "rockmongo"
       hostname: rockmongo
-      environment:
-         - MONGO_NAME=mongo
-         - MONGO_HOSTNAME=xxx.xxx.xxx.xxx
-         - MONGO_PORT=27017
       ports:
           - "8888:80"

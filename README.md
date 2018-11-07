@@ -11,6 +11,9 @@ docker cp rockmongo:/app/config.php config.php
 
 vim config.php
 
+$MONGO["servers"][$i]["mongo_name"] = "标签名";//mongo server name
+$MONGO["servers"][$i]["mongo_host"] = "MongoDB地址";//mongo host
+$MONGO["servers"][$i]["mongo_port"] = "27017";//mongo port
 $MONGO["servers"][$i]["mongo_db"] = "admin";//default mongo db to connect, works only if mongo_auth=false
 $MONGO["servers"][$i]["mongo_user"] = "用户名";//mongo authentication user name, works only if mongo_auth=false
 $MONGO["servers"][$i]["mongo_pass"] = "密码";//mongo authentication password, works only if mongo_auth=false
